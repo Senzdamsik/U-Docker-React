@@ -1,0 +1,30 @@
+# Tujuan dari file docker-compose ini hanyalah untuk menguji container di local kita saja. Kalau ingin
+# Mendeploynya ke AWS, kita gunakan file .travis.yml
+
+version: "3"
+services: 
+    web:
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        ports:
+            - "3000:3000"
+        volumes:
+            - .:/app
+            - /app/node_modules # ini menunjukan bagian mana yg tidak boleh dihubungkan oleh Volume (optional)...
+
+
+
+    # Sebenarnya bagian di bawah ini bisa tidak perlu dibuat. Ini hanya agar saat mengetes, kita bisa berinteraksi
+    # dengan terminal saja. Penjelasannya di: https://www.udemy.com/course/docker-and-kubernetes-the-complete-guide/learn/lecture/11437088#questions/11959310
+
+    tests:
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        volumes:
+            - .:/app
+            - /app/node_modules
+        command: ["npm", "run", "test"]  
+                                 
+            
