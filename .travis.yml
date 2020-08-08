@@ -9,17 +9,17 @@ before_install:
 script:
     - docker run -e CI=true docker_react npm run test
 
-# deploy:
-#     provider: elasticbeanstalk
-#     region: "ap-southeast-1"
-#     app: "U_Docker_React"
-#     env: "UDockerReact-env"
-#     bucket_name: "elasticbeanstalk-ap-southeast-1-511590767544"
-#     bucket_path: "U_Docker_React"
-#     on:
-#         branch: master
-#     access_key_id: $AWS_ACCESS_KEY
-#     secret_access_key: $AWS_SECRET_KEY
+deploy:
+    provider: elasticbeanstalk
+    region: "ap-southeast-1"
+    app: "U_Docker_React"
+    env: "UDockerReact-env-1"
+    bucket_name: "elasticbeanstalk-ap-southeast-1-511590767544"
+    bucket_path: "U_Docker_React"
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
 
 # Saat sudah sampai di AWS, AWS akan mencari secara otomatis file Dockerfile (bukan Dockerfile.dev). Jadi kita
 # tidak perlu memberitahu AWS soal ini
